@@ -128,8 +128,21 @@ class Usuario {
 			":PASSWORD"=>$this->getDesenha(),
 			":ID"=>$this->getIdUsuario()
 		));
+	}
 
+	public function delete() {
 
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM tb_usuarios WHERE idusuario = :ID",
+		array(
+			":ID"=>$this->getIdUsuario()
+		));
+
+		$this->setIdUsuario(0);
+		$this->setDeslogin("");
+		$this->setDesenha("");
+		$this->setDtCadastro(new DateTime());
 	}
 
 	public function __construct($login = "", $password = "") {
